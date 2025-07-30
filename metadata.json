@@ -1,0 +1,6 @@
+{
+  "name": "EduGenius Bot",
+  "description": "An AI-powered chatbot for educators to generate topic sections, lesson plans, and interview questions relevant to the current job industry.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
