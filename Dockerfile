@@ -20,6 +20,12 @@ FROM nginx:alpine
 # Copy built files from the build stage
 COPY --from=build /app/dist /usr/share/nginx/html
 
+# Copy CSS file
+COPY index.css /usr/share/nginx/html/index.css
+
+# Copy favicon
+COPY public/favicon.ico /usr/share/nginx/html/favicon.ico
+
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
