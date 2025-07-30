@@ -31,6 +31,12 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
+
+# Create log directory
+RUN mkdir -p /var/log/nginx && \
+    touch /var/log/nginx/access.log /var/log/nginx/error.log && \
+    chmod 755 /var/log/nginx && \
+    chmod 644 /var/log/nginx/access.log /var/log/nginx/error.log
 RUN chmod +x /entrypoint.sh
 
 # Expose port 80

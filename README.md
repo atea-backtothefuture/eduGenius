@@ -37,6 +37,18 @@ This contains everything you need to run your app locally or with Docker.
 
 3. Access the application at http://edugenius-xpph.onrender.com
 
+### Logging
+
+The application includes comprehensive logging for both Nginx and backend API calls:
+
+- **Nginx Logs**: Access and error logs are available in the Docker container at `/var/log/nginx/`
+- **API Call Logs**: Backend service calls to the Gemini API are logged with request details and timing information
+- **Viewing Logs**: You can view logs using Docker commands:
+  ```
+  docker-compose logs -f edugenius-bot
+  ```
+- **Log Rotation**: Logs are automatically rotated (max 10MB per file, 3 files max) to prevent disk space issues
+
 ### Option 2: Using Docker Directly
 
 1. Build the Docker image:
@@ -46,7 +58,12 @@ This contains everything you need to run your app locally or with Docker.
 
 2. Run the container:
    ```
-   docker run -p 80:80 -e GEMINI_API_KEY=your_api_key_here -d edugenius-bot
+   docker run -p 80:80 -e GEMINI_API_KEY=your_api_key_here -d --name edugenius-bot edugenius-bot
+   ```
+
+3. View logs:
+   ```
+   docker logs -f edugenius-bot
    ```
    
    Note: When deploying to a production environment like Render, the port mapping is handled by the hosting platform.

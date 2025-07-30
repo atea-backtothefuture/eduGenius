@@ -10,3 +10,14 @@ services:
     environment:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        tag: "{{.Name}}/{{.ID}}"
+    volumes:
+      - nginx_logs:/var/log/nginx
+
+volumes:
+  nginx_logs:

@@ -6,6 +6,9 @@ import type { GeneratedContent } from '../types';
 const ai = new GoogleGenAI({ apiKey: "API_KEY_PLACEHOLDER" });
 
 export async function generateSections(topic: string): Promise<string[]> {
+    console.log(`[API Request] generateSections - Topic: "${topic}"`);
+    const startTime = Date.now();
+    
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
@@ -21,6 +24,9 @@ export async function generateSections(topic: string): Promise<string[]> {
                 }
             }
         });
+        
+        const endTime = Date.now();
+        console.log(`[API Response] generateSections - Duration: ${endTime - startTime}ms - Status: Success`);
 
         const sections = JSON.parse(response.text);
         if (Array.isArray(sections) && sections.every(s => typeof s === 'string')) {
@@ -29,12 +35,16 @@ export async function generateSections(topic: string): Promise<string[]> {
         throw new Error("Invalid format for sections received from API.");
 
     } catch (error) {
-        console.error("Error in generateSections:", error);
+        const endTime = Date.now();
+        console.error(`[API Error] generateSections - Duration: ${endTime - startTime}ms - Error:`, error);
         throw new Error("Failed to generate sections from AI.");
     }
 }
 
 export async function generateContentForSection(topic: string, section: string): Promise<GeneratedContent> {
+    console.log(`[API Request] generateContentForSection - Topic: "${topic}", Section: "${section}"`);
+    const startTime = Date.now();
+    
     try {
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
@@ -80,13 +90,17 @@ export async function generateContentForSection(topic: string, section: string):
                 }
             }
         });
+        
+        const endTime = Date.now();
+        console.log(`[API Response] generateContentForSection - Duration: ${endTime - startTime}ms - Status: Success`);
 
         const content = JSON.parse(response.text);
         // Add validation here if needed
         return content as GeneratedContent;
 
     } catch (error) {
-        console.error("Error in generateContentForSection:", error);
+        const endTime = Date.now();
+        console.error(`[API Error] generateContentForSection - Duration: ${endTime - startTime}ms - Error:`, error);
         throw new Error("Failed to generate content from AI.");
     }
 }
