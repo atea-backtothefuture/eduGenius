@@ -32,8 +32,10 @@ This contains everything you need to run your app locally or with Docker.
    ```
    docker-compose up -d
    ```
+   
+   Note: When deploying to a production environment like Render, the port configuration is handled by the hosting platform.
 
-3. Access the application at http://localhost:14221
+3. Access the application at http://edugenius-xpph.onrender.com
 
 ### Option 2: Using Docker Directly
 
@@ -44,7 +46,9 @@ This contains everything you need to run your app locally or with Docker.
 
 2. Run the container:
    ```
-   docker run -p 14221:80 -e GEMINI_API_KEY=your_api_key_here -d edugenius-bot
+   docker run -p 80:80 -e GEMINI_API_KEY=your_api_key_here -d edugenius-bot
    ```
+   
+   Note: When deploying to a production environment like Render, the port mapping is handled by the hosting platform.
 
-3. Access the application at http://localhost:14221
+3. Access the application at http://edugenius-xpph.onrender.com
