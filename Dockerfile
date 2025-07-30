@@ -29,6 +29,9 @@ COPY public/favicon.ico /usr/share/nginx/html/favicon.ico
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# Copy main nginx configuration with log format
+COPY main-nginx.conf /etc/nginx/nginx.conf
+
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 
